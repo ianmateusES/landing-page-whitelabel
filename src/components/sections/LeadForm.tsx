@@ -1,0 +1,137 @@
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import type { BrandConfig, ContentConfig } from "@/types";
+import { buildLeadWhatsAppUrl } from "@/lib/whatsapp";
+
+const schema = z.object({
+  name: z.string().min(2, "Digite seu nome completo"),
+  age: z
+    .string()
+    .min(1, "Digite sua idade")
+    .refine((v) => {
+      const n = parseInt(v, 10);
+      return !isNaN(n) && n >= 10 && n <= 99;
+    }, "Idade deve ser entre 10 e 99"),
+  city: z.string().min(2, "Digite sua cidade"),
+});
+
+type FormData = z.infer<typeof schema>;
+
+interface Props {
+  brand: BrandConfig;
+  content: ContentConfig["form"];
+}
+
+export function LeadForm({ brand, content }: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const onSubmit = (data: FormData) => {
+    const url = buildLeadWhatsAppUrl(brand.contact.whatsapp, brand.name, data);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <section id="contato" className="py-20 md:py-28 bg-[var(--color-background)]">
+      <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          label={content.sectionLabel}
+          heading={content.heading}
+          subheading={content.subheading}
+          className="mb-10"
+        />
+
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+          {/* Name */}
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-[var(--color-foreground)] mb-1.5"
+            >
+              {content.fields.name.label}
+            </label>
+            <input
+              id="name"
+              type="text"
+              autoComplete="name"
+              placeholder={content.fields.name.placeholder}
+              {...register("name")}
+              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
+                errors.name ? "border-red-500" : "border-[var(--color-border)]"
+              }`}
+            />
+            {errors.name && (
+              <p className="mt-1.5 text-sm text-red-400">{errors.name.message}</p>
+            )}
+          </div>
+
+          {/* Age */}
+          <div>
+            <label
+              htmlFor="age"
+              className="block text-sm font-medium text-[var(--color-foreground)] mb-1.5"
+            >
+              {content.fields.age.label}
+            </label>
+            <input
+              id="age"
+              type="number"
+              inputMode="numeric"
+              min="10"
+              max="99"
+              placeholder={content.fields.age.placeholder}
+              {...register("age")}
+              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
+                errors.age ? "border-red-500" : "border-[var(--color-border)]"
+              }`}
+            />
+            {errors.age && (
+              <p className="mt-1.5 text-sm text-red-400">{errors.age.message}</p>
+            )}
+          </div>
+
+          {/* City */}
+          <div>
+            <label
+              htmlFor="city"
+              className="block text-sm font-medium text-[var(--color-foreground)] mb-1.5"
+            >
+              {content.fields.city.label}
+            </label>
+            <input
+              id="city"
+              type="text"
+              autoComplete="address-level2"
+              placeholder={content.fields.city.placeholder}
+              {...register("city")}
+              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
+                errors.city ? "border-red-500" : "border-[var(--color-border)]"
+              }`}
+            />
+            {errors.city && (
+              <p className="mt-1.5 text-sm text-red-400">{errors.city.message}</p>
+            )}
+          </div>
+
+          <Button type="submit" fullWidth size="lg" className="mt-2 gap-3">
+            <MessageCircle size={20} />
+            {content.submitLabel}
+          </Button>
+
+          <p className="text-xs text-[var(--color-muted-foreground)] text-center leading-relaxed">
+            {content.privacyNotice}
+          </p>
+        </form>
+      </div>
+    </section>
+  );
+}

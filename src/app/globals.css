@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #a3e635;
+  --color-primary-foreground: #0a0a0a;
+  --color-accent: #84cc16;
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-muted: #1a1a1a;
+  --color-muted-foreground: #a1a1aa;
+  --color-border: #27272a;
+  --color-card: #111111;
+  --color-card-foreground: #fafafa;
+}
+
+@theme inline {
+  --color-brand-primary: var(--color-primary);
+  --color-brand-primary-foreground: var(--color-primary-foreground);
+  --color-brand-accent: var(--color-accent);
+  --color-brand-bg: var(--color-background);
+  --color-brand-fg: var(--color-foreground);
+  --color-brand-muted: var(--color-muted);
+  --color-brand-muted-fg: var(--color-muted-foreground);
+  --color-brand-border: var(--color-border);
+  --color-brand-card: var(--color-card);
+  --color-brand-card-fg: var(--color-card-foreground);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,9 @@
+<svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="140" height="40" rx="6" fill="#0a0a0a"/>
+  <!-- MS monogram -->
+  <text x="8" y="27" font-family="system-ui, sans-serif" font-size="20" font-weight="800" fill="#a3e635">MS</text>
+  <!-- Workout text -->
+  <text x="46" y="26" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#fafafa">Workout</text>
+  <!-- Accent line -->
+  <rect x="8" y="32" width="124" height="2" rx="1" fill="#a3e635" opacity="0.4"/>
+</svg>
