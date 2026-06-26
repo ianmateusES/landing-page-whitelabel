@@ -16,7 +16,7 @@ todos:
     status: completed
   - id: m4-polish
     content: "M4 Polish: SEO MS Workout, performance, template _template para novos personais, README whitelabel, UAT"
-    status: in_progress
+    status: completed
 isProject: false
 ---
 

@@ -1,4 +1,5 @@
 import { brand, content } from "@/config";
+import { loadBrandResults } from "@/lib/load-results";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -15,10 +16,12 @@ import { MissionCta } from "@/components/sections/MissionCta";
 import { LeadForm } from "@/components/sections/LeadForm";
 
 export default function Home() {
+  const results = loadBrandResults(brand.slug);
+
   return (
-    <>
+    <div className="w-full min-h-screen">
       <Header brand={brand} content={content.nav} />
-      <main>
+      <main className="w-full">
         <Hero brand={brand} content={content.hero} />
         <About brand={brand} content={content.about} />
         <AuthorityStats content={content.stats} />
@@ -26,13 +29,13 @@ export default function Home() {
         <Support content={content.support} />
         <HowItWorks content={content.howItWorks} />
         <Comparison brand={brand} content={content.comparison} />
-        <Results brand={brand} content={content.results} />
+        <Results results={results} brandName={brand.name} content={content.results} />
         <Testimonials content={content.testimonials} />
         <Pricing brand={brand} content={content.plans} />
         <MissionCta brand={brand} content={content.mission} />
-        <LeadForm brand={brand} content={content.form} />
+        <LeadForm brand={brand} content={content.form} plans={content.plans.items} />
       </main>
       <Footer brand={brand} content={content.footer} />
-    </>
+    </div>
   );
 }

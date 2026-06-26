@@ -8,6 +8,7 @@ export const content: ContentConfig = {
       { label: "Como funciona", href: "#como-funciona" },
       { label: "Resultados", href: "#resultados" },
       { label: "Planos", href: "#planos" },
+      { label: "Comece agora", href: "#contato" },
     ],
   },
 
@@ -273,6 +274,7 @@ export const content: ContentConfig = {
       name: { label: "Nome completo", placeholder: "Seu nome" },
       age: { label: "Idade", placeholder: "Sua idade" },
       city: { label: "Cidade", placeholder: "Sua cidade" },
+      plan: { label: "Plano de interesse", placeholder: "Selecione um plano (opcional)" },
     },
     submitLabel: "Chamar no WhatsApp",
     privacyNotice:

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ContentConfig, Testimonial } from "@/types";
@@ -36,8 +37,8 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
 
 export function Testimonials({ content }: Props) {
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-muted)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-20 md:py-28 bg-[var(--color-muted)]">
+      <Container>
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -48,7 +49,7 @@ export function Testimonials({ content }: Props) {
             <TestimonialCard key={item.id} item={item} index={i} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

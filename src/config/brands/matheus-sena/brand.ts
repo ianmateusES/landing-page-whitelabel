@@ -4,12 +4,12 @@ export const brand: BrandConfig = {
   slug: "matheus-sena",
   name: "MS Workout",
   professionalName: "Matheus Sena",
-  tagline: "A mudança de hábito pelo treino",
+  tagline: "",
   logo: {
-    src: "/brands/matheus-sena/logo.svg",
-    alt: "MS Workout",
-    width: 140,
-    height: 40,
+    src: "/brands/matheus-sena/logo.png",
+    alt: "Matheus Sena — Workout Office",
+    width: 220,
+    height: 61,
   },
   colors: {
     primary: "#a3e635",
@@ -31,34 +31,8 @@ export const brand: BrandConfig = {
     instagram: "matheussenames",
   },
   images: {
-    // BLOCKER B-02..04: substituir .svg pelos assets reais do cliente (T27)
     hero: "/brands/matheus-sena/hero.svg",
-    profile: "/brands/matheus-sena/profile.svg",
+    profile: "/brands/matheus-sena/profile.jpeg",
     og: "/brands/matheus-sena/og.svg",
-    results: [
-      {
-        id: "lucas-muniz",
-        name: "Lucas Muniz",
-        src: "/brands/matheus-sena/results/lucas-muniz.svg",
-        alt: "Transformação do Lucas Muniz",
-      },
-      {
-        id: "matheus-aluno",
-        name: "Matheus",
-        src: "/brands/matheus-sena/results/matheus.svg",
-        alt: "Transformação do Matheus",
-      },
-      {
-        id: "haissa",
-        name: "Haissa",
-        src: "/brands/matheus-sena/results/haissa.svg",
-        alt: "Transformação da Haissa",
-      },
-    ],
-    testimonials: [
-      { id: "lucas-muniz" },
-      { id: "matheus-aluno" },
-      { id: "haissa" },
-    ],
   },
 };

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, Users } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import type { BrandConfig, ContentConfig } from "@/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -19,7 +20,7 @@ export function Hero({ brand, content }: Props) {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20"
       style={{
         background: `radial-gradient(ellipse at 50% 0%, var(--color-primary)15 0%, transparent 60%), var(--color-background)`,
       }}
@@ -34,7 +35,7 @@ export function Hero({ brand, content }: Props) {
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Container size="lg" className="relative z-10 text-center">
         {/* Social proof badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,18 +77,18 @@ export function Hero({ brand, content }: Props) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center max-w-sm mx-auto sm:max-w-none"
         >
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <Button size="lg">{content.primaryCta}</Button>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto">{content.primaryCta}</Button>
           </a>
-          <a href="#resultados">
-            <Button size="lg" variant="outline">
+          <a href="#resultados" className="w-full sm:w-auto">
+            <Button size="lg" variant="outline" className="w-full sm:w-auto">
               {content.secondaryCta}
             </Button>
           </a>
         </motion.div>
-      </div>
+      </Container>
 
       {/* Scroll indicator */}
       <motion.div

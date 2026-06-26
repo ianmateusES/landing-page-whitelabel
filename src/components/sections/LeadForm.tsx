@@ -4,45 +4,63 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { MessageCircle } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import type { BrandConfig, ContentConfig } from "@/types";
+import type { BrandConfig, ContentConfig, Plan } from "@/types";
 import { buildLeadWhatsAppUrl } from "@/lib/whatsapp";
 
 const schema = z.object({
-  name: z.string().min(2, "Digite seu nome completo"),
-  age: z
-    .string()
-    .min(1, "Digite sua idade")
-    .refine((v) => {
-      const n = parseInt(v, 10);
+  name: z.string(),
+  age: z.string().refine(
+    (value) => {
+      if (!value.trim()) return true;
+      const n = parseInt(value, 10);
       return !isNaN(n) && n >= 10 && n <= 99;
-    }, "Idade deve ser entre 10 e 99"),
-  city: z.string().min(2, "Digite sua cidade"),
+    },
+    { message: "Idade deve ser entre 10 e 99" }
+  ),
+  city: z.string(),
+  planId: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
 
+const inputClassName =
+  "w-full rounded-xl bg-[var(--color-muted)] border border-[var(--color-border)] px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors";
+
 interface Props {
   brand: BrandConfig;
   content: ContentConfig["form"];
+  plans: Plan[];
 }
 
-export function LeadForm({ brand, content }: Props) {
+export function LeadForm({ brand, content, plans }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: "", age: "", city: "", planId: "" },
+  });
 
   const onSubmit = (data: FormData) => {
-    const url = buildLeadWhatsAppUrl(brand.contact.whatsapp, brand.name, data);
+    const selectedPlan = plans.find((plan) => plan.id === data.planId);
+    const url = buildLeadWhatsAppUrl(brand.contact.whatsapp, brand.name, {
+      name: data.name,
+      age: data.age,
+      city: data.city,
+      plan: selectedPlan
+        ? { name: selectedPlan.name, price: selectedPlan.price }
+        : undefined,
+    });
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <section id="contato" className="py-20 md:py-28 bg-[var(--color-background)]">
-      <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contato" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
+      <Container size="sm">
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -51,7 +69,6 @@ export function LeadForm({ brand, content }: Props) {
         />
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-          {/* Name */}
           <div>
             <label
               htmlFor="name"
@@ -65,16 +82,10 @@ export function LeadForm({ brand, content }: Props) {
               autoComplete="name"
               placeholder={content.fields.name.placeholder}
               {...register("name")}
-              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
-                errors.name ? "border-red-500" : "border-[var(--color-border)]"
-              }`}
+              className={inputClassName}
             />
-            {errors.name && (
-              <p className="mt-1.5 text-sm text-red-400">{errors.name.message}</p>
-            )}
           </div>
 
-          {/* Age */}
           <div>
             <label
               htmlFor="age"
@@ -90,16 +101,13 @@ export function LeadForm({ brand, content }: Props) {
               max="99"
               placeholder={content.fields.age.placeholder}
               {...register("age")}
-              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
-                errors.age ? "border-red-500" : "border-[var(--color-border)]"
-              }`}
+              className={`${inputClassName} ${errors.age ? "border-red-500" : ""}`}
             />
             {errors.age && (
               <p className="mt-1.5 text-sm text-red-400">{errors.age.message}</p>
             )}
           </div>
 
-          {/* City */}
           <div>
             <label
               htmlFor="city"
@@ -113,13 +121,30 @@ export function LeadForm({ brand, content }: Props) {
               autoComplete="address-level2"
               placeholder={content.fields.city.placeholder}
               {...register("city")}
-              className={`w-full rounded-xl bg-[var(--color-muted)] border px-4 py-3 text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:border-[var(--color-primary)] transition-colors ${
-                errors.city ? "border-red-500" : "border-[var(--color-border)]"
-              }`}
+              className={inputClassName}
             />
-            {errors.city && (
-              <p className="mt-1.5 text-sm text-red-400">{errors.city.message}</p>
-            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="planId"
+              className="block text-sm font-medium text-[var(--color-foreground)] mb-1.5"
+            >
+              {content.fields.plan.label}
+            </label>
+            <select
+              id="planId"
+              {...register("planId")}
+              className={`${inputClassName} appearance-none cursor-pointer`}
+              defaultValue=""
+            >
+              <option value="">{content.fields.plan.placeholder}</option>
+              {plans.map((plan) => (
+                <option key={plan.id} value={plan.id}>
+                  {plan.name} — {plan.price}
+                </option>
+              ))}
+            </select>
           </div>
 
           <Button type="submit" fullWidth size="lg" className="mt-2 gap-3">
@@ -131,7 +156,7 @@ export function LeadForm({ brand, content }: Props) {
             {content.privacyNotice}
           </p>
         </form>
-      </div>
+      </Container>
     </section>
   );
 }

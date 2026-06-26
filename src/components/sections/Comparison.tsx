@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { BrandConfig, ContentConfig } from "@/types";
@@ -18,8 +19,8 @@ export function Comparison({ brand, content }: Props) {
   });
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-muted)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-20 md:py-28 bg-[var(--color-muted)]">
+      <Container size="lg">
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -73,11 +74,11 @@ export function Comparison({ brand, content }: Props) {
         </div>
 
         <div className="text-center">
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <Button size="lg">{content.ctaLabel}</Button>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
+            <Button size="lg" className="w-full sm:w-auto">{content.ctaLabel}</Button>
           </a>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -76,12 +76,27 @@ public/brands/{slug}/
 ├── hero.webp         ← imagem do hero (1920×1080 recomendado)
 ├── profile.webp      ← foto do profissional (retrato 3:4)
 ├── og.png            ← Open Graph (1200×630)
-└── results/
-    ├── aluno-1.webp  ← fotos de antes/depois (retrato 3:4)
-    └── aluno-2.webp
+└── results/              ← carregados automaticamente (ver abaixo)
 ```
 
-**Formatos recomendados:** WebP para fotos, SVG para logotipos.
+#### Resultados (dinâmico)
+
+Adicione pares **imagem + .txt** em `public/brands/{slug}/results/`:
+
+```
+public/brands/{slug}/results/
+├── lucas-muniz.jpeg
+├── lucas-muniz.txt    ← conteúdo: "Lucas Muniz" (nome exibido no card)
+├── haissa.webp
+└── haissa.txt         ← conteúdo: "Haissa"
+```
+
+- Formatos aceitos: `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`
+- O `.txt` deve ter o **mesmo nome** da imagem (sem extensão)
+- Sem `.txt`, exibe **somente a imagem** (sem nome/legenda abaixo)
+- Não é necessário editar `brand.ts` — novos alunos aparecem automaticamente após rebuild
+
+**Formatos recomendados:** WebP ou JPEG para fotos, SVG para logotipos.
 **Tamanho máximo:** ≤ 500KB por imagem (use [Squoosh](https://squoosh.app/) para comprimir).
 
 ### 5. Registre o novo slug em `config/index.ts`

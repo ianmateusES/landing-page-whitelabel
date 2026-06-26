@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { BrandConfig, ContentConfig } from "@/types";
 
@@ -13,8 +14,8 @@ interface Props {
 
 export function About({ brand, content }: Props) {
   return (
-    <section id="about" className="py-20 md:py-28 bg-[var(--color-background)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
+      <Container>
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Profile image */}
           <motion.div
@@ -36,7 +37,7 @@ export function About({ brand, content }: Props) {
               <div className="absolute inset-0 ring-1 ring-inset ring-[var(--color-primary)]/20 rounded-2xl pointer-events-none" />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-4 -right-4 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] rounded-xl px-4 py-3 shadow-lg">
+            <div className="absolute bottom-0 right-0 sm:-bottom-4 sm:-right-4 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] rounded-xl px-4 py-3 shadow-lg">
               <p className="text-2xl font-bold">6+</p>
               <p className="text-xs font-semibold">anos de exp.</p>
             </div>
@@ -68,7 +69,7 @@ export function About({ brand, content }: Props) {
               <p className="text-sm font-semibold text-[var(--color-foreground)] uppercase tracking-wider mb-4">
                 Todo trabalho é voltado para você que busca:
               </p>
-              <ul className="grid grid-cols-2 gap-3">
+              <ul className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-3">
                 {content.objectives.map((obj) => (
                   <li key={obj} className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[var(--color-primary)] flex-shrink-0" />
@@ -79,7 +80,7 @@ export function About({ brand, content }: Props) {
             </div>
           </motion.div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

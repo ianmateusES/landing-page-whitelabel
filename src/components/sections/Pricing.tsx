@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -36,18 +37,24 @@ function PlanCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={plan.featured ? "md:-mt-4 md:mb-4" : ""}
+      className="h-full"
     >
       <Card featured={plan.featured} className="h-full flex flex-col">
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex items-start justify-between gap-2 mb-4 min-h-[3.25rem]">
           <div>
             <p className="text-sm text-[var(--color-muted-foreground)] mb-1">{plan.period}</p>
             <h3 className="text-lg font-semibold text-[var(--color-card-foreground)]">
               {plan.name}
             </h3>
           </div>
-          {plan.badge && (
-            <Badge variant={plan.featured ? "primary" : "muted"}>{plan.badge}</Badge>
+          {plan.badge ? (
+            <Badge variant={plan.featured ? "primary" : "muted"} className="shrink-0">
+              {plan.badge}
+            </Badge>
+          ) : (
+            <span className="invisible shrink-0" aria-hidden>
+              <Badge variant="muted">—</Badge>
+            </span>
           )}
         </div>
 
@@ -55,7 +62,7 @@ function PlanCard({
           {plan.price}
         </p>
 
-        <ul className="space-y-3 mb-8 flex-1">
+        <ul className="space-y-3 mb-8 flex-1 min-h-0">
           {plan.features.map((feature) => (
             <li key={feature} className="flex items-start gap-2 text-sm">
               <Check
@@ -67,7 +74,7 @@ function PlanCard({
           ))}
         </ul>
 
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-auto">
           <Button
             variant={plan.featured ? "primary" : "outline"}
             fullWidth
@@ -83,20 +90,20 @@ function PlanCard({
 
 export function Pricing({ brand, content }: Props) {
   return (
-    <section id="planos" className="py-20 md:py-28 bg-[var(--color-background)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="planos" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
+      <Container>
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
           subheading={content.subheading}
           className="mb-14"
         />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {content.items.map((plan, i) => (
             <PlanCard key={plan.id} plan={plan} brand={brand} index={i} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

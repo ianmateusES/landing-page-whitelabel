@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ClipboardList, Dumbbell, Flame, Heart } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ContentConfig, TrainingType } from "@/types";
@@ -43,8 +44,8 @@ function TrainingCard({ item, index }: { item: TrainingType; index: number }) {
 
 export function TrainingTypes({ content }: Props) {
   return (
-    <section id="planejamento" className="py-20 md:py-28 bg-[var(--color-background)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="planejamento" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
+      <Container>
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -56,7 +57,7 @@ export function TrainingTypes({ content }: Props) {
             <TrainingCard key={item.id} item={item} index={i} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

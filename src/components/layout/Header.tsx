@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import type { BrandConfig, ContentConfig } from "@/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -34,7 +35,7 @@ export function Header({ brand, content }: Props) {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Container>
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center" aria-label={`${brand.name} — início`}>
@@ -75,7 +76,7 @@ export function Header({ brand, content }: Props) {
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-      </div>
+      </Container>
 
       {/* Mobile menu */}
       {menuOpen && (

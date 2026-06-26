@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import type { BrandConfig, ContentConfig } from "@/types";
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 
 export function Footer({ brand, content }: Props) {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-background)] py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="w-full border-t border-[var(--color-border)] bg-[var(--color-background)] py-10">
+      <Container className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
           <Image
             src={brand.logo.src}
@@ -35,7 +36,7 @@ export function Footer({ brand, content }: Props) {
           </a>
           <p className="text-[var(--color-muted-foreground)] text-xs">{content.copyright}</p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

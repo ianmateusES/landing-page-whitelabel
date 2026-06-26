@@ -15,7 +15,7 @@ export interface BrandConfig {
   slug: string;
   name: string;
   professionalName: string;
-  tagline: string;
+  tagline?: string | null;
   logo: {
     src: string;
     alt: string;
@@ -33,22 +33,14 @@ export interface BrandConfig {
     hero: string;
     profile: string;
     og: string;
-    results: ResultImage[];
-    testimonials: TestimonialImage[];
   };
 }
 
 export interface ResultImage {
   id: string;
-  name: string;
+  name?: string;
   src: string;
   alt: string;
-}
-
-export interface TestimonialImage {
-  id: string;
-  src?: string;
-  alt?: string;
 }
 
 export interface NavItem {
@@ -177,6 +169,7 @@ export interface ContentConfig {
       name: { label: string; placeholder: string };
       age: { label: string; placeholder: string };
       city: { label: string; placeholder: string };
+      plan: { label: string; placeholder: string };
     };
     submitLabel: string;
     privacyNotice: string;

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import type { BrandConfig, ContentConfig } from "@/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -17,12 +18,12 @@ export function MissionCta({ brand, content }: Props) {
 
   return (
     <section
-      className="py-20 md:py-28"
+      className="w-full py-20 md:py-28"
       style={{
         background: `radial-gradient(ellipse at 50% 50%, var(--color-primary)10 0%, transparent 70%), var(--color-muted)`,
       }}
     >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Container size="md" className="text-center">
         <motion.blockquote
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,11 +44,11 @@ export function MissionCta({ brand, content }: Props) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <Button size="lg">{content.ctaLabel}</Button>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
+            <Button size="lg" className="w-full sm:w-auto">{content.ctaLabel}</Button>
           </a>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

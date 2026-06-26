@@ -12,10 +12,14 @@ const inter = Inter({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://msworkout.com.br";
 
+const pageTitle = brand.tagline?.trim()
+  ? `${brand.name} — ${brand.tagline.trim()}`
+  : brand.name;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${brand.name} — ${brand.tagline}`,
+    default: pageTitle,
     template: `%s | ${brand.name}`,
   },
   description: `Consultoria Online de treino com ${brand.professionalName}. Planejamento 100% individualizado para hipertrofia, emagrecimento, performance e qualidade de vida. Suporte diário via WhatsApp.`,
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
     "musculação",
   ],
   openGraph: {
-    title: `${brand.name} — ${brand.tagline}`,
+    title: pageTitle,
     description: `Consultoria Online com ${brand.professionalName}. Treino individualizado, suporte diário e resultados reais.`,
     images: [{ url: brand.images.og, width: 1200, height: 630 }],
     type: "website",
@@ -39,12 +43,20 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${brand.name} — ${brand.tagline}`,
+    title: pageTitle,
     images: [brand.images.og],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: [
+      { url: `/brands/${brand.slug}/favicon.ico`, sizes: "any" },
+      { url: `/brands/${brand.slug}/favicon.png`, type: "image/png", sizes: "32x32" },
+      { url: `/brands/${brand.slug}/icon.png`, type: "image/png", sizes: "192x192" },
+    ],
+    apple: `/brands/${brand.slug}/apple-icon.png`,
   },
 };
 

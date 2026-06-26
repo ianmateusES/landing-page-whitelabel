@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ContentConfig } from "@/types";
 
@@ -10,8 +11,8 @@ interface Props {
 
 export function HowItWorks({ content }: Props) {
   return (
-    <section id="como-funciona" className="py-20 md:py-28 bg-[var(--color-muted)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="como-funciona" className="w-full py-20 md:py-28 bg-[var(--color-muted)]">
+      <Container>
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -47,7 +48,7 @@ export function HowItWorks({ content }: Props) {
             </motion.div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

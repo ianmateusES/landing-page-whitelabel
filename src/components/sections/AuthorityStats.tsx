@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Container } from "@/components/ui/Container";
 import type { ContentConfig } from "@/types";
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 
 export function AuthorityStats({ content }: Props) {
   return (
-    <section className="py-14 bg-[var(--color-muted)] border-y border-[var(--color-border)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-14 bg-[var(--color-muted)] border-y border-[var(--color-border)]">
+      <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {content.map((stat, i) => (
             <motion.div
@@ -28,7 +29,7 @@ export function AuthorityStats({ content }: Props) {
             </motion.div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

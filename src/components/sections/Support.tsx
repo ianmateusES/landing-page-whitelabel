@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle, Video, BarChart2 } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ContentConfig, SupportItem } from "@/types";
@@ -18,8 +19,8 @@ interface Props {
 
 export function Support({ content }: Props) {
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-background)]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-20 md:py-28 bg-[var(--color-background)]">
+      <Container>
         <SectionHeading
           label={content.sectionLabel}
           heading={content.heading}
@@ -52,7 +53,7 @@ export function Support({ content }: Props) {
             );
           })}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
