@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { CarouselTrack } from "@/components/ui/CarouselTrack";
 import { ImageLightbox } from "@/components/ui/ImageLightbox";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ContentConfig, ResultImage } from "@/types";
+import { useCarouselAutoplay } from "@/hooks/useCarouselAutoplay";
 
 const INTERVAL_MS = 3000;
 const GAP_PX = 16;
@@ -110,11 +112,11 @@ export function Results({ results, brandName, content }: Props) {
     });
   }, [maxIndex]);
 
-  useEffect(() => {
-    if (paused || lightboxIndex !== null || results.length <= visibleCount) return;
-    const timer = setInterval(goNext, INTERVAL_MS);
-    return () => clearInterval(timer);
-  }, [paused, lightboxIndex, goNext, results.length, visibleCount]);
+  const resetAutoplay = useCarouselAutoplay(
+    !paused && lightboxIndex === null && results.length > visibleCount,
+    INTERVAL_MS,
+    goNext
+  );
 
   const openLightbox = (index: number) => {
     setPaused(true);
@@ -174,15 +176,15 @@ export function Results({ results, brandName, content }: Props) {
             </>
           )}
 
-          <div ref={containerRef} className="overflow-hidden">
-            <motion.div
-              className="flex"
-              style={{ gap: GAP_PX }}
-              animate={{ x: -offset }}
-              transition={{
-                duration: prefersReducedMotion ? 0.15 : 0.5,
-                ease: "easeInOut",
-              }}
+          <div ref={containerRef} className="overflow-hidden touch-pan-y">
+            <CarouselTrack
+              offset={offset}
+              gap={GAP_PX}
+              canSwipe={slideCount > 1}
+              onPrev={goPrev}
+              onNext={goNext}
+              onDrag={resetAutoplay}
+              prefersReducedMotion={!!prefersReducedMotion}
             >
               {results.map((result, index) => (
                 <div key={result.id} style={{ width: cardWidth || undefined, flexShrink: 0 }}>
@@ -193,7 +195,7 @@ export function Results({ results, brandName, content }: Props) {
                   />
                 </div>
               ))}
-            </motion.div>
+            </CarouselTrack>
           </div>
 
           {slideCount > 1 && (
