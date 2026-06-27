@@ -95,8 +95,15 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
       role="dialog"
       aria-modal="true"
       aria-label={item.alt}
-      onClick={onClose}
     >
+      <button
+        type="button"
+        className="absolute inset-0 z-0 cursor-default"
+        onClick={onClose}
+        aria-label="Fechar visualização"
+        tabIndex={-1}
+      />
+
       <button
         type="button"
         onClick={onClose}
@@ -133,14 +140,10 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
         </>
       )}
 
-      <div
-        className="flex-1 flex flex-col items-center justify-center min-h-0 pt-14 pb-4"
-        onClick={onClose}
-      >
-        <div
-          className="relative w-full flex-1 min-h-0 overflow-hidden touch-pan-y"
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div className="relative z-10 flex flex-1 flex-col items-center min-h-0 pt-14 pb-4 pointer-events-none">
+        <div className="flex-1 min-h-4 w-full" aria-hidden />
+
+        <div className="relative w-full max-w-3xl h-[min(70vh,calc(100vw-2rem))] shrink-0 overflow-hidden touch-pan-y pointer-events-auto">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={item.src}
@@ -156,7 +159,7 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
               onDragEnd={handleDragEnd}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <div className="relative w-full h-full sm:max-w-3xl sm:mx-auto">
+              <div className="relative w-full h-full">
                 <Image
                   src={item.src}
                   alt={item.alt}
@@ -172,10 +175,7 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
         </div>
 
         {(item.caption || item.subcaption) && (
-          <div
-            className="shrink-0 px-4 pt-3 text-center max-w-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="shrink-0 px-4 pt-3 text-center max-w-lg pointer-events-auto">
             {item.caption && (
               <p className="text-white font-semibold text-base sm:text-lg">{item.caption}</p>
             )}
@@ -186,10 +186,7 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
         )}
 
         {hasMultiple && (
-          <div
-            className="shrink-0 flex justify-center gap-2 pt-4 pb-2"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="shrink-0 flex justify-center gap-2 pt-4 pb-2 pointer-events-auto">
             {items.map((_, i) => (
               <button
                 key={i}
@@ -208,6 +205,8 @@ export function ImageLightbox({ items, index, onIndexChange, onClose }: ImageLig
             ))}
           </div>
         )}
+
+        <div className="flex-1 min-h-4 w-full" aria-hidden />
       </div>
     </motion.div>,
     document.body

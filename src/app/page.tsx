@@ -24,17 +24,17 @@ export default function Home() {
     <div className="w-full min-h-screen">
       <Header brand={brand} content={content.nav} />
       <main className="w-full">
-        <Hero brand={brand} content={content.hero} />
+        <Hero content={content.hero} />
         <About brand={brand} content={content.about} />
         <AuthorityStats content={content.stats} />
         <TrainingTypes content={content.trainingTypes} />
         <Support content={content.support} />
         <HowItWorks content={content.howItWorks} />
-        <Comparison brand={brand} content={content.comparison} />
+        <Comparison content={content.comparison} />
         <Results results={results} brandName={brand.name} content={content.results} />
         <Testimonials testimonials={testimonials} content={content.testimonials} />
-        <Pricing brand={brand} content={content.plans} />
-        <MissionCta brand={brand} content={content.mission} />
+        <Pricing content={content.plans} />
+        <MissionCta content={content.mission} />
         <LeadForm brand={brand} content={content.form} plans={content.plans.items} />
       </main>
       <Footer brand={brand} content={content.footer} />

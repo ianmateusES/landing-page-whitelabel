@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import type { BrandConfig, ContentConfig } from "@/types";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { contactHref } from "@/lib/contact";
 
 interface Props {
   brand: BrandConfig;
@@ -24,9 +24,7 @@ export function Header({ brand, content }: Props) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const whatsappUrl = buildWhatsAppUrl(brand.contact.whatsapp, {
-    message: `Olá! Quero saber mais sobre a consultoria ${brand.name}.`,
-  });
+  const contactUrl = contactHref();
 
   return (
     <header
@@ -67,7 +65,7 @@ export function Header({ brand, content }: Props) {
             <SocialLinks social={brand.social} className="hidden md:flex" />
 
             {/* Desktop CTA */}
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hidden md:block">
+            <a href={contactUrl} className="hidden md:block">
               <Button size="sm">{content.ctaLabel}</Button>
             </a>
 
@@ -99,7 +97,7 @@ export function Header({ brand, content }: Props) {
             ))}
           </nav>
           <SocialLinks social={brand.social} className="mb-4" />
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <a href={contactUrl} onClick={() => setMenuOpen(false)}>
             <Button fullWidth>{content.ctaLabel}</Button>
           </a>
         </div>

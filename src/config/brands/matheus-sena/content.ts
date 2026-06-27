@@ -257,9 +257,9 @@ export const content: ContentConfig = {
     headingHighlight: "primeiro passo",
     subheading: "Preencha seus dados e fale direto com nosso time no WhatsApp.",
     fields: {
-      name: { label: "Nome completo", placeholder: "Seu nome" },
-      age: { label: "Idade", placeholder: "Ex: 28" },
-      city: { label: "Cidade", placeholder: "Sua cidade" },
+      name: { label: "Nome completo (opcional)", placeholder: "Seu nome" },
+      age: { label: "Idade (opcional)", placeholder: "Ex: 28" },
+      city: { label: "Cidade (opcional)", placeholder: "Sua cidade" },
       plan: { label: "Plano de interesse (opcional)", placeholder: "Selecione um plano" },
     },
     submitLabel: "Chamar no WhatsApp",

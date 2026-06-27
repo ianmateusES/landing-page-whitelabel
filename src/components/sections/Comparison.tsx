@@ -5,19 +5,14 @@ import { X, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import type { BrandConfig, ContentConfig } from "@/types";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import type { ContentConfig } from "@/types";
+import { contactHref } from "@/lib/contact";
 
 interface Props {
-  brand: BrandConfig;
   content: ContentConfig["comparison"];
 }
 
-export function Comparison({ brand, content }: Props) {
-  const whatsappUrl = buildWhatsAppUrl(brand.contact.whatsapp, {
-    message: `Olá! Quero saber mais sobre a consultoria ${brand.name}.`,
-  });
-
+export function Comparison({ content }: Props) {
   return (
     <section className="w-full py-20 md:py-28 bg-[var(--color-muted)]">
       <Container size="lg">
@@ -28,7 +23,6 @@ export function Comparison({ brand, content }: Props) {
         />
 
         <div className="grid md:grid-cols-2 gap-6 mb-10">
-          {/* Negative column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -51,7 +45,6 @@ export function Comparison({ brand, content }: Props) {
             </ul>
           </motion.div>
 
-          {/* Positive column */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -74,8 +67,10 @@ export function Comparison({ brand, content }: Props) {
         </div>
 
         <div className="text-center">
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
-            <Button size="lg" className="w-full sm:w-auto">{content.ctaLabel}</Button>
+          <a href={contactHref()} className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
+            <Button size="lg" className="w-full sm:w-auto">
+              {content.ctaLabel}
+            </Button>
           </a>
         </div>
       </Container>

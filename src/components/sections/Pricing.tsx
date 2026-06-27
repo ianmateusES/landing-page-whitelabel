@@ -7,30 +7,14 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import type { BrandConfig, ContentConfig, Plan } from "@/types";
-import { buildPlanWhatsAppUrl } from "@/lib/whatsapp";
+import type { ContentConfig, Plan } from "@/types";
+import { contactHref, selectContactPlan } from "@/lib/contact";
 
 interface Props {
-  brand: BrandConfig;
   content: ContentConfig["plans"];
 }
 
-function PlanCard({
-  plan,
-  brand,
-  index,
-}: {
-  plan: Plan;
-  brand: BrandConfig;
-  index: number;
-}) {
-  const whatsappUrl = buildPlanWhatsAppUrl(
-    brand.contact.whatsapp,
-    brand.name,
-    plan.name,
-    plan.price
-  );
-
+function PlanCard({ plan, index }: { plan: Plan; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -74,7 +58,14 @@ function PlanCard({
           ))}
         </ul>
 
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-auto">
+        <a
+          href={contactHref(plan.id)}
+          onClick={(event) => {
+            event.preventDefault();
+            selectContactPlan(plan.id);
+          }}
+          className="mt-auto"
+        >
           <Button
             variant={plan.featured ? "primary" : "outline"}
             fullWidth
@@ -88,7 +79,7 @@ function PlanCard({
   );
 }
 
-export function Pricing({ brand, content }: Props) {
+export function Pricing({ content }: Props) {
   return (
     <section id="planos" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
       <Container>
@@ -100,7 +91,7 @@ export function Pricing({ brand, content }: Props) {
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {content.items.map((plan, i) => (
-            <PlanCard key={plan.id} plan={plan} brand={brand} index={i} />
+            <PlanCard key={plan.id} plan={plan} index={i} />
           ))}
         </div>
       </Container>

@@ -3,19 +3,14 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import type { BrandConfig, ContentConfig } from "@/types";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import type { ContentConfig } from "@/types";
+import { contactHref } from "@/lib/contact";
 
 interface Props {
-  brand: BrandConfig;
   content: ContentConfig["mission"];
 }
 
-export function MissionCta({ brand, content }: Props) {
-  const whatsappUrl = buildWhatsAppUrl(brand.contact.whatsapp, {
-    message: `Olá! Quero saber mais sobre a consultoria ${brand.name}.`,
-  });
-
+export function MissionCta({ content }: Props) {
   return (
     <section
       className="w-full py-20 md:py-28"
@@ -44,8 +39,10 @@ export function MissionCta({ brand, content }: Props) {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
-            <Button size="lg" className="w-full sm:w-auto">{content.ctaLabel}</Button>
+          <a href={contactHref()} className="inline-block w-full max-w-sm sm:w-auto sm:max-w-none">
+            <Button size="lg" className="w-full sm:w-auto">
+              {content.ctaLabel}
+            </Button>
           </a>
         </motion.div>
       </Container>

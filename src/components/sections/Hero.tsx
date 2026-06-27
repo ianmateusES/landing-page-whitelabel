@@ -4,19 +4,14 @@ import { motion } from "framer-motion";
 import { ArrowDown, Users } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import type { BrandConfig, ContentConfig } from "@/types";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import type { ContentConfig } from "@/types";
+import { contactHref } from "@/lib/contact";
 
 interface Props {
-  brand: BrandConfig;
   content: ContentConfig["hero"];
 }
 
-export function Hero({ brand, content }: Props) {
-  const whatsappUrl = buildWhatsAppUrl(brand.contact.whatsapp, {
-    message: `Olá! Quero saber mais sobre a consultoria ${brand.name}.`,
-  });
-
+export function Hero({ content }: Props) {
   return (
     <section
       id="inicio"
@@ -79,7 +74,7 @@ export function Hero({ brand, content }: Props) {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center max-w-sm mx-auto sm:max-w-none"
         >
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+          <a href={contactHref()} className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto">{content.primaryCta}</Button>
           </a>
           <a href="#resultados" className="w-full sm:w-auto">

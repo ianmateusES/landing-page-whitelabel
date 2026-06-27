@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import type { BrandConfig, ContentConfig, Plan } from "@/types";
 import { buildLeadWhatsAppUrl } from "@/lib/whatsapp";
+import { getPlanIdFromUrl, registerContactPlanListener } from "@/lib/contact";
 
 const schema = z.object({
   name: z.string(),
@@ -39,11 +41,38 @@ export function LeadForm({ brand, content, plans }: Props) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", age: "", city: "", planId: "" },
   });
+
+  useEffect(() => {
+    const validIds = plans.map((plan) => plan.id);
+
+    const applyPlan = (planId: string) => {
+      if (validIds.includes(planId)) {
+        setValue("planId", planId);
+      }
+    };
+
+    const fromUrl = getPlanIdFromUrl(validIds);
+    if (fromUrl) applyPlan(fromUrl);
+
+    const unregister = registerContactPlanListener(applyPlan);
+
+    const syncFromUrl = () => {
+      const planId = getPlanIdFromUrl(validIds);
+      if (planId) applyPlan(planId);
+    };
+
+    window.addEventListener("popstate", syncFromUrl);
+    return () => {
+      unregister();
+      window.removeEventListener("popstate", syncFromUrl);
+    };
+  }, [plans, setValue]);
 
   const onSubmit = (data: FormData) => {
     const selectedPlan = plans.find((plan) => plan.id === data.planId);
