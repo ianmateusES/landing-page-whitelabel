@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import type { BrandConfig, ContentConfig } from "@/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -62,19 +63,23 @@ export function Header({ brand, content }: Props) {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hidden md:block">
-            <Button size="sm">{content.ctaLabel}</Button>
-          </a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <SocialLinks social={brand.social} className="hidden md:flex" />
 
-          {/* Mobile menu toggle */}
-          <button
-            className="md:hidden text-[var(--color-foreground)] p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            {/* Desktop CTA */}
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hidden md:block">
+              <Button size="sm">{content.ctaLabel}</Button>
+            </a>
+
+            {/* Mobile menu toggle */}
+            <button
+              className="md:hidden text-[var(--color-foreground)] p-2"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </Container>
 
@@ -93,6 +98,7 @@ export function Header({ brand, content }: Props) {
               </a>
             ))}
           </nav>
+          <SocialLinks social={brand.social} className="mb-4" />
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
             <Button fullWidth>{content.ctaLabel}</Button>
           </a>

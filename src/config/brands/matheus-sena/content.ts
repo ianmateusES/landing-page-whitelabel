@@ -29,6 +29,10 @@ export const content: ContentConfig = {
       "Todo o trabalho é voltado para você que busca uma transformação real — rápida, segura e sustentável, sempre de acordo com a sua rotina.",
     ],
     objectives: ["Hipertrofia", "Performance", "Emagrecimento", "Qualidade de vida"],
+    instagramCta: {
+      text: "Me acompanhe no Instagram e veja meus resultados e dicas de treino.",
+      buttonLabel: "Seguir no Instagram",
+    },
   },
 
   stats: [
@@ -168,26 +172,7 @@ export const content: ContentConfig = {
   testimonials: {
     sectionLabel: "O que dizem os alunos",
     heading: "Feedbacks reais",
-    items: [
-      {
-        id: "lucas-muniz",
-        name: "Lucas Muniz",
-        text: "O Matheus montou um treino que se encaixou perfeitamente na minha rotina. Em poucos meses já vi resultados que nunca tinha conseguido sozinho.",
-        imageId: "lucas-muniz",
-      },
-      {
-        id: "matheus-aluno",
-        name: "Matheus",
-        text: "O suporte via WhatsApp faz toda a diferença. Sempre que tive dúvida sobre execução, ele respondia rápido e com clareza.",
-        imageId: "matheus-aluno",
-      },
-      {
-        id: "haissa",
-        name: "Haissa",
-        text: "Nunca imaginei que conseguiria atingir meu objetivo de forma tão saudável e sem passar fome. O planejamento do Matheus é incrível!",
-        imageId: "haissa",
-      },
-    ],
+    subheading: "Relatos reais de alunos no dia a dia da consultoria.",
   },
 
   plans: {
@@ -267,18 +252,19 @@ export const content: ContentConfig = {
   },
 
   form: {
-    sectionLabel: "Dê o primeiro passo",
-    heading: "Comece agora",
-    subheading: "Preencha seus dados e fale direto com o Matheus no WhatsApp.",
+    sectionLabel: "Comece agora",
+    heading: "Dê o",
+    headingHighlight: "primeiro passo",
+    subheading: "Preencha seus dados e fale direto com nosso time no WhatsApp.",
     fields: {
       name: { label: "Nome completo", placeholder: "Seu nome" },
-      age: { label: "Idade", placeholder: "Sua idade" },
+      age: { label: "Idade", placeholder: "Ex: 28" },
       city: { label: "Cidade", placeholder: "Sua cidade" },
-      plan: { label: "Plano de interesse", placeholder: "Selecione um plano (opcional)" },
+      plan: { label: "Plano de interesse (opcional)", placeholder: "Selecione um plano" },
     },
     submitLabel: "Chamar no WhatsApp",
     privacyNotice:
-      "Ao enviar, você será redirecionado para o WhatsApp com seus dados preenchidos. Suas informações não são armazenadas.",
+      "Ao enviar, você será redirecionado para o WhatsApp com seus dados preenchidos.",
   },
 
   footer: {

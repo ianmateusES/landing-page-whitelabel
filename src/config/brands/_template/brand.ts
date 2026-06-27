@@ -46,8 +46,12 @@ export const brand: BrandConfig = {
   },
 
   social: {
-    // Instagram sem @ (ex: "nomedousuario")
-    instagram: "seuperfil",
+    // Usuário ou URL completa — omita o que não usar
+    // instagram: "seuperfil",
+    // youtube: "seucanal",
+    // tiktok: "seuperfil",
+    // telegram: "seuusuario",
+    // spotify: "seuartista",
   },
 
   images: {

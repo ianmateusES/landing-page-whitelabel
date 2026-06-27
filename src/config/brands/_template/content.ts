@@ -32,6 +32,10 @@ export const content: ContentConfig = {
       "Segundo parágrafo — missão e abordagem.",
     ],
     objectives: ["Objetivo 1", "Objetivo 2", "Objetivo 3", "Objetivo 4"],
+    instagramCta: {
+      text: "Me acompanhe no Instagram e veja meus resultados e dicas.",
+      buttonLabel: "Seguir no Instagram",
+    },
   },
 
   stats: [
@@ -136,20 +140,7 @@ export const content: ContentConfig = {
   testimonials: {
     sectionLabel: "Feedbacks",
     heading: "O que dizem os alunos",
-    items: [
-      {
-        id: "aluno-1",
-        name: "Nome do Aluno 1",
-        text: "Depoimento do aluno 1.",
-        imageId: "aluno-1",
-      },
-      {
-        id: "aluno-2",
-        name: "Nome do Aluno 2",
-        text: "Depoimento do aluno 2.",
-        imageId: "aluno-2",
-      },
-    ],
+    subheading: "Prints de relatos reais dos alunos.",
   },
 
   plans: {
@@ -187,14 +178,15 @@ export const content: ContentConfig = {
   },
 
   form: {
-    sectionLabel: "Primeiro passo",
-    heading: "Comece agora",
+    sectionLabel: "Comece agora",
+    heading: "Dê o",
+    headingHighlight: "primeiro passo",
     subheading: "Preencha seus dados e fale direto conosco no WhatsApp.",
     fields: {
       name: { label: "Nome completo", placeholder: "Seu nome" },
       age: { label: "Idade", placeholder: "Sua idade" },
       city: { label: "Cidade", placeholder: "Sua cidade" },
-      plan: { label: "Plano de interesse", placeholder: "Selecione um plano (opcional)" },
+      plan: { label: "Plano de interesse (opcional)", placeholder: "Selecione um plano" },
     },
     submitLabel: "Chamar no WhatsApp",
     privacyNotice:

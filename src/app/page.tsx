@@ -1,5 +1,6 @@
 import { brand, content } from "@/config";
 import { loadBrandResults } from "@/lib/load-results";
+import { loadBrandTestimonials } from "@/lib/load-testimonials";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -17,6 +18,7 @@ import { LeadForm } from "@/components/sections/LeadForm";
 
 export default function Home() {
   const results = loadBrandResults(brand.slug);
+  const testimonials = loadBrandTestimonials(brand.slug);
 
   return (
     <div className="w-full min-h-screen">
@@ -30,7 +32,7 @@ export default function Home() {
         <HowItWorks content={content.howItWorks} />
         <Comparison brand={brand} content={content.comparison} />
         <Results results={results} brandName={brand.name} content={content.results} />
-        <Testimonials content={content.testimonials} />
+        <Testimonials testimonials={testimonials} content={content.testimonials} />
         <Pricing brand={brand} content={content.plans} />
         <MissionCta brand={brand} content={content.mission} />
         <LeadForm brand={brand} content={content.form} plans={content.plans.items} />

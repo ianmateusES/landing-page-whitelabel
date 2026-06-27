@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import type { BrandConfig, ContentConfig } from "@/types";
 
 interface Props {
@@ -24,16 +24,7 @@ export function Footer({ brand, content }: Props) {
         </div>
 
         <div className="flex flex-col items-center md:items-end gap-3">
-          <a
-            href={`https://instagram.com/${brand.social.instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] transition-colors text-sm"
-            aria-label={`Instagram @${brand.social.instagram}`}
-          >
-            <ExternalLink size={14} />
-            @{brand.social.instagram}
-          </a>
+          <SocialLinks social={brand.social} />
           <p className="text-[var(--color-muted-foreground)] text-xs">{content.copyright}</p>
         </div>
       </Container>

@@ -11,6 +11,16 @@ export interface BrandColors {
   cardForeground: string;
 }
 
+export type SocialPlatform = "instagram" | "youtube" | "tiktok" | "telegram" | "spotify";
+
+export interface BrandSocial {
+  instagram?: string;
+  youtube?: string;
+  tiktok?: string;
+  telegram?: string;
+  spotify?: string;
+}
+
 export interface BrandConfig {
   slug: string;
   name: string;
@@ -26,9 +36,7 @@ export interface BrandConfig {
   contact: {
     whatsapp: string; // E.164 without + e.g. "5511999999999"
   };
-  social: {
-    instagram: string; // without @ e.g. "matheussenames"
-  };
+  social: BrandSocial;
   images: {
     hero: string;
     profile: string;
@@ -89,11 +97,11 @@ export interface Plan {
   ctaLabel: string;
 }
 
-export interface Testimonial {
+export interface TestimonialImage {
   id: string;
-  name: string;
-  text: string;
-  imageId?: string;
+  name?: string;
+  src: string;
+  alt: string;
 }
 
 export interface ContentConfig {
@@ -113,6 +121,10 @@ export interface ContentConfig {
     heading: string;
     bio: string[];
     objectives: string[];
+    instagramCta?: {
+      text: string;
+      buttonLabel: string;
+    };
   };
   stats: StatItem[];
   trainingTypes: {
@@ -148,7 +160,7 @@ export interface ContentConfig {
   testimonials: {
     sectionLabel: string;
     heading: string;
-    items: Testimonial[];
+    subheading?: string;
   };
   plans: {
     sectionLabel: string;
@@ -164,6 +176,7 @@ export interface ContentConfig {
   form: {
     sectionLabel: string;
     heading: string;
+    headingHighlight?: string;
     subheading: string;
     fields: {
       name: { label: string; placeholder: string };

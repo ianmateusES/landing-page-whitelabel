@@ -24,11 +24,15 @@ export const brand: BrandConfig = {
     cardForeground: "#fafafa",
   },
   contact: {
-    // BLOCKER B-01: número real pendente — substituir antes do deploy
-    whatsapp: "5511999999999",
+    whatsapp: "558597829081",
   },
   social: {
-    instagram: "matheussenames",
+    // Usuário ou URL completa — omita o que não usar
+    instagram: "matheussenams",
+    // youtube: "seucanal",
+    // tiktok: "seuperfil",
+    // telegram: "seuusuario",
+    // spotify: "seuartista",
   },
   images: {
     hero: "/brands/matheus-sena/hero.svg",

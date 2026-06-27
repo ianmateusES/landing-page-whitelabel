@@ -4,7 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SocialIcon } from "@/components/ui/SocialIcon";
+import { getInstagramUrl } from "@/lib/social";
 import type { BrandConfig, ContentConfig } from "@/types";
 
 interface Props {
@@ -13,6 +16,10 @@ interface Props {
 }
 
 export function About({ brand, content }: Props) {
+  const instagramUrl = getInstagramUrl(brand.social);
+  const instagramCta = content.instagramCta;
+  const showInstagramCta = instagramUrl && instagramCta;
+
   return (
     <section id="about" className="w-full py-20 md:py-28 bg-[var(--color-background)]">
       <Container>
@@ -78,6 +85,25 @@ export function About({ brand, content }: Props) {
                 ))}
               </ul>
             </div>
+
+            {showInstagramCta && (
+              <div className="mt-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-muted)] p-5 sm:p-6">
+                <p className="text-[var(--color-foreground)] leading-relaxed mb-4">
+                  {instagramCta.text}
+                </p>
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block w-full sm:w-auto"
+                >
+                  <Button variant="outline" className="w-full sm:w-auto gap-2">
+                    <SocialIcon platform="instagram" />
+                    {instagramCta.buttonLabel}
+                  </Button>
+                </a>
+              </div>
+            )}
           </motion.div>
         </div>
       </Container>
